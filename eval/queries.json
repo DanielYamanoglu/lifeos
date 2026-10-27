@@ -1,0 +1,15 @@
+[
+  {"q": "sourdough starter feeding schedule", "type": "lexical", "relevant": ["sourdough-starter"]},
+  {"q": "tagliatelle and tomato ragu", "type": "lexical", "relevant": ["pasta-night"]},
+  {"q": "which books are on my reading list", "type": "lexical", "relevant": ["reading-list"]},
+  {"q": "flights and an apartment for Lisbon", "type": "lexical", "relevant": ["lisbon-trip"]},
+  {"q": "what sensor should the bot use", "type": "lexical", "relevant": ["garden-bot-parts"]},
+  {"q": "What is Jonas working on?", "type": "relational", "relevant": ["garden-bot-design", "garden-bot-parts", "garden-bot-standup"]},
+  {"q": "What did Lena recommend?", "type": "relational", "relevant": ["reading-list", "book-club"]},
+  {"q": "What did Tomas suggest?", "type": "relational", "relevant": ["lisbon-restaurants", "balcony-herbs"]},
+  {"q": "Everything connected to Maya", "type": "relational", "relevant": ["sourdough-starter", "lisbon-trip", "maya-one-on-one", "lisbon-restaurants"]},
+  {"q": "Who is helping with the trip?", "type": "relational", "relevant": ["lisbon-trip", "lisbon-restaurants", "maya-one-on-one"]},
+  {"q": "What do I need to prepare for the weekend dinner with friends?", "type": "relational", "relevant": ["pasta-night", "weekly-review"]},
+  {"q": "Which notes are about the watering project on the balcony?", "type": "relational", "relevant": ["garden-bot-design", "garden-bot-parts", "garden-bot-standup", "balcony-herbs"]},
+  {"q": "Which of my projects does Priya contribute to?", "type": "relational", "relevant": ["garden-bot-parts", "garden-bot-design"]}
+]

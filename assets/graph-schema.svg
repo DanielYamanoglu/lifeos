@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="900" height="430" fill="#f8fafc"/>
+  <rect x="0.5" y="0.5" width="899" height="429" fill="none" stroke="#cbd5e1"/>
+  <text x="24" y="32" font-size="16" font-weight="700" fill="#0f172a">Graph schema</text>
+
+  <g font-size="13" font-weight="700" text-anchor="middle">
+    <rect x="360" y="60" width="180" height="50" rx="25" fill="#e2e8f0" stroke="#475569"/><text x="450" y="90" fill="#0f172a">Note</text>
+    <rect x="60" y="190" width="150" height="50" rx="25" fill="#dbeafe" stroke="#2563eb"/><text x="135" y="220" fill="#1e3a8a">Person</text>
+    <rect x="375" y="190" width="150" height="50" rx="25" fill="#dcfce7" stroke="#16a34a"/><text x="450" y="220" fill="#14532d">Project</text>
+    <rect x="690" y="190" width="150" height="50" rx="25" fill="#fef9c3" stroke="#ca8a04"/><text x="765" y="220" fill="#713f12">Topic</text>
+    <rect x="215" y="340" width="150" height="50" rx="25" fill="#ffedd5" stroke="#ea580c"/><text x="290" y="370" fill="#7c2d12">Task</text>
+    <rect x="535" y="340" width="150" height="50" rx="25" fill="#fce7f3" stroke="#db2777"/><text x="610" y="370" fill="#831843">Event</text>
+  </g>
+
+  <g stroke="#475569" stroke-width="1.8" fill="none" marker-end="url(#b)">
+    <path d="M400,108 L170,190" stroke-dasharray="5 4"/>
+    <path d="M450,110 L450,188" stroke-dasharray="5 4"/>
+    <path d="M500,108 L730,190" stroke-dasharray="5 4"/>
+    <path d="M210,215 L373,215"/>
+    <path d="M525,215 L688,215"/>
+    <path d="M270,340 L170,242"/>
+    <path d="M320,340 L420,242"/>
+    <path d="M585,340 L475,242"/>
+    <path d="M635,340 L735,242"/>
+    <path d="M365,365 L533,365"/>
+  </g>
+
+  <g font-size="11" fill="#334155" text-anchor="middle">
+    <text x="262" y="142">MENTIONS</text>
+    <text x="482" y="152" text-anchor="start">MENTIONS</text>
+    <text x="640" y="142">MENTIONS</text>
+    <text x="292" y="207">WORKS_ON</text>
+    <text x="607" y="207">RELATED_TO</text>
+    <text x="200" y="302" text-anchor="end">ASSIGNED_TO</text>
+    <text x="338" y="296" text-anchor="start">PART_OF</text>
+    <text x="552" y="296" text-anchor="end">RELATED_TO</text>
+    <text x="705" y="302" text-anchor="start">RELATED_TO</text>
+    <text x="449" y="357">PART_OF</text>
+  </g>
+  <text x="24" y="412" font-size="11" fill="#475569">Dashed: Note-MENTIONS->Entity (any type). Solid: entity relations. Also: Person-ATTENDS->Event; RELATED_TO is the generic fallback between any two entities.</text>
+</svg>
