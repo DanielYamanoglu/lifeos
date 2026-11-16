@@ -9,7 +9,7 @@ A personal knowledge engine that combines a **Neo4j knowledge graph** with **Qdr
 [![CI](https://github.com/DanielYamanoglu/lifeos/actions/workflows/ci.yml/badge.svg)](https://github.com/DanielYamanoglu/lifeos/actions/workflows/ci.yml)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 
-> All data in this repository (notes, people, queries) is **fictional**. "Alex" is a made-up user. The system runs fully offline with in-memory stores, no Docker and no API keys; Neo4j and Qdrant are used when their env vars are set.
+> All data in this repository (notes, people, queries) is **fictional**. "Alex" is a made-up user. With the built-in hashing embedder the system runs fully offline with in-memory stores, no Docker and no API keys; Neo4j and Qdrant are used when their env vars are set.
 
 ![architecture](assets/architecture.svg)
 
@@ -38,6 +38,8 @@ A personal knowledge engine that combines a **Neo4j knowledge graph** with **Qdr
    - fusion: vector rank 4, graph rank 2 -> weighted RRF 0.0253
 ```
 
+This is the fourth of four results, shown because its trail is easy to follow. The hits above it are noisier (one is pulled in through a weak vector seed), which the full output shows; with the offline hashing embedder, ranking on a 12-note corpus is rough.
+
 The agent trace for a planning request (stub LLM, real tool calls against the graph):
 
 ```
@@ -55,9 +57,11 @@ Retrieval evaluation on **12 fictional notes and 13 hand-written queries** (5 le
 | Embedder | Retriever | Recall@3 | Recall@5 | MRR |
 |---|---|---|---|---|
 | hashing (offline) | vector only | 0.814 | 0.897 | 0.859 |
+| hashing (offline) | graph only | 0.840 | 1.000 | 0.833 |
 | hashing (offline) | hybrid, 1 hop | 0.872 | 0.974 | 0.821 |
 | hashing (offline) | hybrid, 2 hops | 0.872 | 0.955 | 0.859 |
 | MiniLM | vector only | 0.731 | 0.731 | 0.782 |
+| MiniLM | graph only | 0.756 | 0.878 | 0.821 |
 | MiniLM | hybrid, 1 hop | 0.712 | 0.782 | 0.821 |
 | MiniLM | hybrid, 2 hops | 0.769 | 0.878 | 0.821 |
 
@@ -67,7 +71,8 @@ Read these numbers with care:
 
 - The set is tiny, fictional and written by the author. With 12 notes, top-5 already covers 40% of the corpus. It demonstrates the mechanism and gives a regression harness; it is **not** evidence about real-world quality.
 - Defaults (hub damping, seed threshold, graph weight 0.6) were chosen while developing against this same set, so the numbers are optimistic.
-- On the 5 lexical queries every retriever scores identically (Recall@5 = 1.0). The differences come from the 8 relational queries. There, 2-hop hybrid beats vector-only on Recall@5 (0.927 vs 0.833 with hashing, 0.802 vs 0.562 with MiniLM), while 1-hop hybrid with MiniLM is *worse* than vector-only at Recall@3 (0.531 vs 0.562) and the gains are not uniform.
+- Hybrid is not uniformly best: graph-only has the highest Recall@5 with the hashing embedder (1.000) and ties 2-hop hybrid with MiniLM.
+- On the 5 lexical queries every retriever reaches Recall@3 = Recall@5 = 1.0. The differences come from the 8 relational queries. There, 2-hop hybrid beats vector-only on Recall@5 (0.927 vs 0.833 with hashing, 0.802 vs 0.562 with MiniLM), while 1-hop hybrid with MiniLM is *worse* than vector-only at Recall@3 (0.531 vs 0.562) and the gains are not uniform.
 - "graph only" still uses vector hits to seed the graph when a query names no entity, so it is not independent of the embedder.
 
 ## Quickstart
@@ -80,8 +85,8 @@ source .venv/bin/activate
 
 pytest -q                          # 32 tests, no network
 python examples/demo.py            # ingest sample notes, hybrid queries, three agents
-python eval/run_eval.py            # vector-only vs hybrid evaluation + figure
-uvicorn lifeos.api:create_app --factory --port 8000
+python eval/run_eval.py            # vector-only vs hybrid evaluation + figure (downloads MiniLM once)
+LIFEOS_EMBEDDER=hashing uvicorn lifeos.api:create_app --factory --port 8000   # instant start; drop the variable to use MiniLM
 python -m lifeos.mcp_server        # MCP server over stdio
 ```
 
