@@ -6,7 +6,7 @@ A personal knowledge engine that combines a **Neo4j knowledge graph** with **Qdr
 ![neo4j](https://img.shields.io/badge/graph-Neo4j%205-008CC1?logo=neo4j&logoColor=white)
 ![qdrant](https://img.shields.io/badge/vectors-Qdrant-DC244C)
 ![mcp](https://img.shields.io/badge/MCP-server-6f42c1)
-![tests](https://img.shields.io/badge/tests-32%20passing-brightgreen)
+[![CI](https://github.com/DanielYamanoglu/lifeos/actions/workflows/ci.yml/badge.svg)](https://github.com/DanielYamanoglu/lifeos/actions/workflows/ci.yml)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 
 > All data in this repository (notes, people, queries) is **fictional**. "Alex" is a made-up user. The system runs fully offline with in-memory stores, no Docker and no API keys; Neo4j and Qdrant are used when their env vars are set.
